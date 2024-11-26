@@ -49,31 +49,13 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: out
 
-      # (Optional) Clean up build artifacts
-      # - name: Cleanup build artifacts
-      #   if: always()
-      #   run: |
-      #     rm -rf node_modules
-      #     rm -rf .next
-      #     rm -rf out
-
-
-      # - name: Next Pages
-      #   uses: anorcle/next-pages@v1.0
-      # - name: Commit and push changes
-      #   run: |
-      #     git config --global user.name "Dashvin"
-      #     git config --global user.email "circleline10@gmail.com"
-      #     git add -A
-      #     git commit -m "New Build"
-      #     git push
+      - name: Cleanup build artifacts
+        if: always()
+        run: |
+          rm -rf node_modules
+          rm -rf .next
+          rm -rf out
 
       # Runs a single command using the runners shell
       - name: Run a one-line script
-        run: echo Hello, world!
-
-      # # Runs a set of commands using the runners shell
-      # - name: Run a multi-line script
-      #   run: |
-      #     echo Add other actions to build,
-      #     echo test, and deploy your project.
+        run: echo "Deployment complete."

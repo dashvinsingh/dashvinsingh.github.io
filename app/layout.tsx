@@ -11,7 +11,7 @@ import { baseUrl } from './sitemap'
 export const metadata: Metadata = {
   metadataBase: new URL(baseUrl),
   title: {
-    default: 'Next.js Portfolio Starter',
+    default: 'Dashvin',
     template: '%s | Next.js Portfolio Starter',
   },
   description: 'Dashvin Singh Description',
@@ -19,7 +19,7 @@ export const metadata: Metadata = {
     title: "Dashvin's portfolio",
     description: 'This is my portfolio.',
     url: baseUrl,
-    siteName: 'My Portfolio',
+    siteName: 'Dashvin',
     locale: 'en_US',
     type: 'website',
   },
@@ -56,9 +56,10 @@ export default function RootLayout({
         <main className="flex-auto min-w-0 mt-6 flex flex-col px-2 md:px-0">
           <Navbar />
           {children}
-          <Footer />
-          <Analytics />
-          <SpeedInsights />
+          {/* Enable these when you're ready to publish. */}
+          {/* <Footer /> */}
+          {/* <Analytics /> */}
+          {/* <SpeedInsights /> */}
         </main>
       </body>
     </html>
