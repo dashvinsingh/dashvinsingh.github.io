@@ -49,6 +49,19 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: out
 
+      # Add CNAME file
+      - name: Checkout gh-pages
+        uses: actions/checkout@v4
+        with:
+          ref: 'gh-pages'
+      
+      - name: Push CNAME file
+        run: |
+          echo "blog.dashvin.com" > CNAME
+          git add CNAME
+          git commit -m "pushing cname"
+          git push
+
       - name: Cleanup build artifacts
         if: always()
         run: |
