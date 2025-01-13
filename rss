@@ -5,10 +5,10 @@
         <link>https://blog.dashvin.com</link>
         <description>This is my portfolio RSS feed</description>
         <item>
-          <title>Hello World</title>
+          <title>Welcome!</title>
           <link>https://blog.dashvin.com/blog/HelloWorld</link>
           <description>An introduction blog post</description>
-          <pubDate>Tue, 26 Nov 2024 00:00:00 GMT</pubDate>
+          <pubDate>Mon, 13 Jan 2025 00:00:00 GMT</pubDate>
         </item>
     </channel>
   </rss>
