@@ -7,7 +7,7 @@ export default function Page() {
         Dashvin
       </h1>
       <p className="mb-4">
-        {`Thoughts brewing ☕️`}
+        {`Welcome to the place for continuous learning and brewing thoughts ☕️`}
       </p>
       <div className="my-8">
         <BlogPosts />
