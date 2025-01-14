@@ -2,14 +2,18 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <url>
 <loc>https://blog.dashvin.com</loc>
-<lastmod>2025-01-13</lastmod>
+<lastmod>2025-01-14</lastmod>
 </url>
 <url>
 <loc>https://blog.dashvin.com/blog</loc>
-<lastmod>2025-01-13</lastmod>
+<lastmod>2025-01-14</lastmod>
 </url>
 <url>
 <loc>https://blog.dashvin.com/blog/HelloWorld</loc>
 <lastmod>2025-01-13</lastmod>
+</url>
+<url>
+<loc>https://blog.dashvin.com/blog/Value</loc>
+<lastmod>2025-01-14</lastmod>
 </url>
 </urlset>
