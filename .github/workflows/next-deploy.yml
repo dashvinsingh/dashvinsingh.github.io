@@ -57,7 +57,7 @@ jobs:
       
       - name: Push CNAME file
         run: |
-          echo "blog.dashvin.com" > CNAME
+          echo "dashvin.com" > CNAME
           git add CNAME
           git commit -m "pushing cname"
           git push
