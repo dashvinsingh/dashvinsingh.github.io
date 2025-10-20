@@ -33,23 +33,52 @@
         <div class="start-content">
             <h1 class="game-title">🎀 Hello Kitty<br>Asteroid Shooter 🎀</h1>
 
-            <h2 style="color: #ff69b4; margin: 20px 0;">Controls</h2>
+            <h2 style="color: #ff69b4; margin: 20px 0;">Select Game Mode</h2>
 
-            <div class="control-selection">
-                <div class="player-control-box pink-box">
-                    <h3>Player 1</h3>
-                    <p class="control-desc" style="margin-left: 0; font-size: 1.1em;">⌨️ WASD + SPACE</p>
-                </div>
-
-                <div class="player-control-box blue-box">
-                    <h3>Player 2</h3>
-                    <p class="control-desc" style="margin-left: 0; font-size: 1.1em;">⌨️ Arrows + ENTER</p>
-                </div>
+            <div class="mode-selection">
+                <button type="button" class="mode-btn" id="singlePlayerBtn">
+                    <span class="mode-emoji">👤</span>
+                    <span class="mode-title">Single Player</span>
+                    <span class="mode-desc">Play solo with touch/keyboard controls</span>
+                </button>
+                <button type="button" class="mode-btn" id="multiPlayerBtn">
+                    <span class="mode-emoji">👥</span>
+                    <span class="mode-title">Two Players</span>
+                    <span class="mode-desc">Keyboard controls for 2 players</span>
+                </button>
             </div>
 
-            <p class="tip">Collect golden stars for ammo!<br>Grab powerups for special abilities!</p>
-            <button type="button" id="startGame" class="start-btn">START GAME</button>
+            <div id="controlInfo" class="control-info hidden">
+                <h3 style="color: #ff69b4; margin: 20px 0;">Controls</h3>
+                <div id="keyboardControls" class="control-selection">
+                    <div class="player-control-box pink-box">
+                        <h3>Player 1</h3>
+                        <p class="control-desc" style="margin-left: 0; font-size: 1.1em;">⌨️ WASD + SPACE</p>
+                    </div>
+                    <div class="player-control-box blue-box">
+                        <h3>Player 2</h3>
+                        <p class="control-desc" style="margin-left: 0; font-size: 1.1em;">⌨️ Arrows + ENTER</p>
+                    </div>
+                </div>
+                <div id="mobileControls" class="control-selection hidden">
+                    <p class="control-desc" style="margin-left: 0; font-size: 1.1em; text-align: center;">
+                        📱 Use on-screen joystick to move<br>
+                        Tap shoot button to fire
+                    </p>
+                </div>
+                <p class="tip">Collect golden stars for ammo!<br>Grab powerups for special abilities!<br>Press ESC to pause</p>
+                <button type="button" id="startGame" class="start-btn">START GAME</button>
+            </div>
         </div>
+    </div>
+
+    <!-- Mobile touch controls -->
+    <div id="mobileControls" class="mobile-controls hidden">
+        <div class="joystick-container" id="joystick">
+            <div class="joystick-base"></div>
+            <div class="joystick-stick" id="joystickStick"></div>
+        </div>
+        <button class="shoot-btn" id="shootBtn">🔫</button>
     </div>
 
     <div id="gameOver" class="game-over hidden">

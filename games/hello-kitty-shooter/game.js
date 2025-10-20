@@ -14,6 +14,7 @@ window.addEventListener('resize', () => {
 let gameStarted = false;
 let gameOver = false;
 let gamePaused = false;
+let singlePlayerMode = false;
 let asteroids = [];
 let particles = [];
 let ammoPickups = [];
@@ -22,6 +23,10 @@ let boss = null;
 let bossActive = false;
 let bossDefeated = false;
 const BOSS_SPAWN_SCORE = 500; // Boss appears when combined score reaches 500
+
+// Mobile touch controls
+let touchJoystick = { x: 0, y: 0, active: false };
+let isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
 
 // Powerup types
 const POWERUP_TYPES = {
@@ -174,14 +179,18 @@ class Player {
         ctx.restore();
     }
 
-    update(gamepadInput = null) {
+    update(gamepadInput = null, useTouchControls = false) {
         if (!this.alive) return;
 
         // Smooth movement
         this.vx = 0;
         this.vy = 0;
 
-        if (gamepadInput) {
+        if (useTouchControls && touchJoystick.active) {
+            // Mobile touch joystick input
+            this.vx = touchJoystick.x * this.speed;
+            this.vy = touchJoystick.y * this.speed;
+        } else if (gamepadInput) {
             // Gamepad input
             this.vx = gamepadInput.axisX * this.speed;
             this.vy = gamepadInput.axisY * this.speed;
@@ -1064,76 +1073,51 @@ function getGamepadInput(gamepadIndex) {
 function initializeStartScreen() {
     const startScreen = document.getElementById('startScreen');
     const startGameBtn = document.getElementById('startGame');
-    const p1GamepadStatus = document.getElementById('p1-gamepad-status');
-    const p2GamepadStatus = document.getElementById('p2-gamepad-status');
+    const singlePlayerBtn = document.getElementById('singlePlayerBtn');
+    const multiPlayerBtn = document.getElementById('multiPlayerBtn');
+    const controlInfo = document.getElementById('controlInfo');
+    const keyboardControls = document.getElementById('keyboardControls');
+    const mobileControlsInfo = document.getElementById('mobileControls');
 
-    // Update gamepad status on start screen
-    function updateStartScreenGamepadStatus() {
-        const connectedGamepads = Object.keys(gamepads).length;
+    // Mode selection
+    if (singlePlayerBtn) {
+        singlePlayerBtn.addEventListener('click', () => {
+            singlePlayerMode = true;
+            controlInfo.classList.remove('hidden');
 
-        if (p1GamepadStatus) {
-            if (connectedGamepads > 0) {
-                p1GamepadStatus.textContent = '✅ Connected';
-                p1GamepadStatus.style.color = '#32cd32';
+            // Hide player 2 HUD in single player
+            const player2Info = document.querySelector('.blue-info');
+            if (player2Info) player2Info.style.display = 'none';
+
+            // Show appropriate controls based on device
+            if (isMobile) {
+                keyboardControls.style.display = 'none';
+                mobileControlsInfo.classList.remove('hidden');
             } else {
-                p1GamepadStatus.textContent = 'Not Connected';
-                p1GamepadStatus.style.color = '#666';
+                keyboardControls.style.display = 'flex';
+                // Hide player 2 controls
+                const p2Box = document.querySelector('.blue-box');
+                if (p2Box) p2Box.style.display = 'none';
             }
-        }
-
-        if (p2GamepadStatus) {
-            if (connectedGamepads > 1) {
-                p2GamepadStatus.textContent = '✅ Connected';
-                p2GamepadStatus.style.color = '#32cd32';
-            } else if (connectedGamepads === 1) {
-                p2GamepadStatus.textContent = 'Share P1 Controller';
-                p2GamepadStatus.style.color = '#87ceeb';
-            } else {
-                p2GamepadStatus.textContent = 'Not Connected';
-                p2GamepadStatus.style.color = '#666';
-            }
-        }
+        });
     }
 
-    // Update status initially and when gamepads connect
-    updateStartScreenGamepadStatus();
-    setInterval(updateStartScreenGamepadStatus, 1000);
+    if (multiPlayerBtn) {
+        multiPlayerBtn.addEventListener('click', () => {
+            singlePlayerMode = false;
+            controlInfo.classList.remove('hidden');
+            keyboardControls.style.display = 'flex';
+            mobileControlsInfo.classList.add('hidden');
 
-    // Control selection for Player 1
-    document.querySelectorAll('input[name="p1-input"]').forEach(radio => {
-        radio.addEventListener('change', (e) => {
-            player1InputMode = e.target.value;
-            if (player1InputMode === 'gamepad') {
-                const availableGamepads = Object.keys(gamepads);
-                if (availableGamepads.length > 0) {
-                    player1GamepadIndex = parseInt(availableGamepads[0]);
-                    document.getElementById('control1').textContent = '🎮 Controller';
-                }
-            } else {
-                player1GamepadIndex = null;
-                document.getElementById('control1').textContent = 'Keyboard';
-            }
-        });
-    });
+            // Show both players in HUD
+            const player2Info = document.querySelector('.blue-info');
+            if (player2Info) player2Info.style.display = 'block';
 
-    // Control selection for Player 2
-    document.querySelectorAll('input[name="p2-input"]').forEach(radio => {
-        radio.addEventListener('change', (e) => {
-            player2InputMode = e.target.value;
-            if (player2InputMode === 'gamepad') {
-                const availableGamepads = Object.keys(gamepads);
-                if (availableGamepads.length > 1) {
-                    player2GamepadIndex = parseInt(availableGamepads[1]);
-                } else if (availableGamepads.length > 0) {
-                    player2GamepadIndex = parseInt(availableGamepads[0]);
-                }
-                document.getElementById('control2').textContent = '🎮 Controller';
-            } else {
-                player2GamepadIndex = null;
-                document.getElementById('control2').textContent = 'Keyboard';
-            }
+            // Show player 2 controls
+            const p2Box = document.querySelector('.blue-box');
+            if (p2Box) p2Box.style.display = 'block';
         });
-    });
+    }
 
     // Start game button
     if (startGameBtn) {
@@ -1142,8 +1126,104 @@ function initializeStartScreen() {
             if (startScreen) {
                 startScreen.style.display = 'none';
             }
+
+            // Show mobile controls if single player on mobile
+            if (singlePlayerMode && isMobile) {
+                const mobileControlsDiv = document.querySelector('.mobile-controls');
+                if (mobileControlsDiv) {
+                    mobileControlsDiv.classList.remove('hidden');
+                }
+                initializeMobileControls();
+            }
         });
     }
+}
+
+// Initialize mobile touch controls
+function initializeMobileControls() {
+    const joystickContainer = document.getElementById('joystick');
+    const joystickStick = document.getElementById('joystickStick');
+    const shootBtn = document.getElementById('shootBtn');
+
+    if (!joystickContainer || !joystickStick || !shootBtn) return;
+
+    let joystickCenter = { x: 0, y: 0 };
+    let touchId = null;
+
+    function updateJoystickPosition(x, y) {
+        const rect = joystickContainer.getBoundingClientRect();
+        joystickCenter = {
+            x: rect.left + rect.width / 2,
+            y: rect.top + rect.height / 2
+        };
+
+        const deltaX = x - joystickCenter.x;
+        const deltaY = y - joystickCenter.y;
+        const distance = Math.sqrt(deltaX * deltaX + deltaY * deltaY);
+        const maxDistance = 45;
+
+        if (distance > maxDistance) {
+            const angle = Math.atan2(deltaY, deltaX);
+            touchJoystick.x = Math.cos(angle);
+            touchJoystick.y = Math.sin(angle);
+            joystickStick.style.left = `${50 + Math.cos(angle) * maxDistance}px`;
+            joystickStick.style.top = `${50 + Math.sin(angle) * maxDistance}px`;
+        } else {
+            touchJoystick.x = deltaX / maxDistance;
+            touchJoystick.y = deltaY / maxDistance;
+            joystickStick.style.left = `${50 + deltaX}px`;
+            joystickStick.style.top = `${50 + deltaY}px`;
+        }
+    }
+
+    function resetJoystick() {
+        touchJoystick.x = 0;
+        touchJoystick.y = 0;
+        touchJoystick.active = false;
+        joystickStick.style.left = '50%';
+        joystickStick.style.top = '50%';
+        touchId = null;
+    }
+
+    joystickContainer.addEventListener('touchstart', (e) => {
+        if (touchId === null) {
+            e.preventDefault();
+            const touch = e.touches[0];
+            touchId = touch.identifier;
+            touchJoystick.active = true;
+            updateJoystickPosition(touch.clientX, touch.clientY);
+        }
+    });
+
+    joystickContainer.addEventListener('touchmove', (e) => {
+        if (touchId !== null) {
+            e.preventDefault();
+            for (let touch of e.touches) {
+                if (touch.identifier === touchId) {
+                    updateJoystickPosition(touch.clientX, touch.clientY);
+                    break;
+                }
+            }
+        }
+    });
+
+    joystickContainer.addEventListener('touchend', (e) => {
+        e.preventDefault();
+        for (let touch of e.changedTouches) {
+            if (touch.identifier === touchId) {
+                resetJoystick();
+                break;
+            }
+        }
+    });
+
+    // Shoot button
+    shootBtn.addEventListener('touchstart', (e) => {
+        e.preventDefault();
+        if (player1.alive && !gamePaused) {
+            player1.shoot();
+        }
+    });
 }
 
 
@@ -1324,8 +1404,13 @@ function updateGame() {
     }
 
     // Update players
-    player1.update(gamepad1Input);
-    player2.update(gamepad2Input);
+    const useTouchForP1 = singlePlayerMode && isMobile;
+    player1.update(gamepad1Input, useTouchForP1);
+
+    // Only update player 2 in multiplayer mode
+    if (!singlePlayerMode) {
+        player2.update(gamepad2Input);
+    }
 
     // Update ammo pickups
     ammoPickups = ammoPickups.filter(pickup => {
@@ -1338,7 +1423,7 @@ function updateGame() {
             playSound('pickup');
             createExplosion(pickup.x, pickup.y, '#FFD700');
         }
-        if (player2.checkPickupCollision(pickup)) {
+        if (!singlePlayerMode && player2.checkPickupCollision(pickup)) {
             player2.addAmmo(10);
             pickup.active = false;
             playSound('pickup');
@@ -1359,7 +1444,7 @@ function updateGame() {
             playSound('powerup');
             createExplosion(powerup.x, powerup.y, powerup.color);
         }
-        if (player2.checkPowerupCollision(powerup)) {
+        if (!singlePlayerMode && player2.checkPowerupCollision(powerup)) {
             player2.activatePowerup(powerup.type);
             powerup.active = false;
             playSound('powerup');
@@ -1396,7 +1481,7 @@ function updateGame() {
                 endGame();
             }
         }
-        if (player2.checkCollision(asteroid)) {
+        if (!singlePlayerMode && player2.checkCollision(asteroid)) {
             asteroid.active = false;
             createExplosion(player2.x, player2.y, player2.color);
             const stillAlive = player2.loseLife();
@@ -1438,7 +1523,7 @@ function updateGame() {
                 const stillAlive = player1.loseLife();
                 if (!stillAlive) endGame();
             }
-            if (proj.checkPlayerCollision(player2)) {
+            if (!singlePlayerMode && proj.checkPlayerCollision(player2)) {
                 proj.active = false;
                 createExplosion(player2.x, player2.y, player2.color);
                 const stillAlive = player2.loseLife();
