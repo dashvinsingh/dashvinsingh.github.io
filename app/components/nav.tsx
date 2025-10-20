@@ -10,6 +10,9 @@ const navItems = {
   '/resources': {
     name : 'resources'
   },
+  '/games': {
+    name: 'games'
+  },
 }
 
 export function Navbar() {
