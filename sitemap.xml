@@ -2,11 +2,15 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <url>
 <loc>https://blog.dashvin.com</loc>
-<lastmod>2025-10-20</lastmod>
+<lastmod>2026-01-07</lastmod>
 </url>
 <url>
 <loc>https://blog.dashvin.com/blog</loc>
-<lastmod>2025-10-20</lastmod>
+<lastmod>2026-01-07</lastmod>
+</url>
+<url>
+<loc>https://blog.dashvin.com/blog/2026-01-07-writing-publicly</loc>
+<lastmod>2026-01-07</lastmod>
 </url>
 <url>
 <loc>https://blog.dashvin.com/blog/HelloWorld</loc>
