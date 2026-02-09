@@ -5,13 +5,19 @@
         <link>https://blog.dashvin.com</link>
         <description>This is my portfolio RSS feed</description>
         <item>
-          <title>2/26: The fundamentals of financial markets</title>
+          <title>Risk Management (3/26)</title>
+          <link>https://blog.dashvin.com/blog/2026-02-09-risk-management</link>
+          <description>An attempt to define risk management and how it affects our day to day</description>
+          <pubDate>Mon, 09 Feb 2026 00:00:00 GMT</pubDate>
+        </item>
+<item>
+          <title>The fundamentals of financial markets (2/26)</title>
           <link>https://blog.dashvin.com/blog/2026-01-21-financial-markets</link>
           <description>A reflection on my investment journey and recent attempts to learn the fundamentals of investment and trading.</description>
           <pubDate>Thu, 22 Jan 2026 00:00:00 GMT</pubDate>
         </item>
 <item>
-          <title>1/26: Writing publicly</title>
+          <title>Writing publicly (1/26)</title>
           <link>https://blog.dashvin.com/blog/2026-01-07-writing-publicly</link>
           <description>A note to self on writing publicly</description>
           <pubDate>Wed, 07 Jan 2026 00:00:00 GMT</pubDate>
