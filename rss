@@ -5,19 +5,25 @@
         <link>https://blog.dashvin.com</link>
         <description>This is my portfolio RSS feed</description>
         <item>
-          <title>Risk Management (3/26)</title>
+          <title>Yoga (4 of 26)</title>
+          <link>https://blog.dashvin.com/blog/2026-03-09-yoga</link>
+          <description>A few thoughts on the beautiful practice of Yoga.</description>
+          <pubDate>Mon, 09 Mar 2026 00:00:00 GMT</pubDate>
+        </item>
+<item>
+          <title>Risk Management (3 of 26)</title>
           <link>https://blog.dashvin.com/blog/2026-02-09-risk-management</link>
           <description>An attempt to define risk management and how it affects our day to day</description>
           <pubDate>Mon, 09 Feb 2026 00:00:00 GMT</pubDate>
         </item>
 <item>
-          <title>The fundamentals of financial markets (2/26)</title>
+          <title>The fundamentals of financial markets (2 of 26)</title>
           <link>https://blog.dashvin.com/blog/2026-01-21-financial-markets</link>
           <description>A reflection on my investment journey and recent attempts to learn the fundamentals of investment and trading.</description>
           <pubDate>Thu, 22 Jan 2026 00:00:00 GMT</pubDate>
         </item>
 <item>
-          <title>Writing publicly (1/26)</title>
+          <title>Writing publicly (1 of 26)</title>
           <link>https://blog.dashvin.com/blog/2026-01-07-writing-publicly</link>
           <description>A note to self on writing publicly</description>
           <pubDate>Wed, 07 Jan 2026 00:00:00 GMT</pubDate>
