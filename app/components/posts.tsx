@@ -67,7 +67,7 @@ export function BlogPosts({ posts }: { posts: Post[] }) {
         <Link
           key={post.slug}
           href={`/blog/${post.slug}`}
-          className="group block rounded-lg border border-neutral-200 dark:border-neutral-800 px-4 py-3 hover:border-neutral-400 dark:hover:border-neutral-600 hover:bg-neutral-50 dark:hover:bg-neutral-900 transition-colors"
+          className="group block rounded-lg border border-neutral-200 dark:border-neutral-800 px-4 py-3 hover:border-neutral-400 dark:hover:border-neutral-600 hover:bg-neutral-50 dark:hover:bg-slate-800 transition-colors"
         >
           <div className="flex items-center justify-between gap-4">
             <p className="text-neutral-900 dark:text-neutral-100 tracking-tight font-medium leading-snug">

@@ -7,6 +7,7 @@ import { Analytics } from '@vercel/analytics/react'
 import { SpeedInsights } from '@vercel/speed-insights/next'
 import Footer from './components/footer'
 import { baseUrl } from './sitemap'
+import { ThemeProvider } from 'next-themes'
 
 export const metadata: Metadata = {
   metadataBase: new URL(baseUrl),
@@ -46,21 +47,23 @@ export default function RootLayout({
   return (
     <html
       lang="en"
+      suppressHydrationWarning
       className={cx(
-        'text-black bg-white dark:text-white dark:bg-black',
         GeistSans.variable,
         GeistMono.variable
       )}
     >
-      <body className="antialiased max-w-xl mx-4 mt-8 lg:mx-auto">
-        <main className="flex-auto min-w-0 mt-6 flex flex-col px-2 md:px-0">
-          <Navbar />
-          {children}
-          {/* Enable these when you're ready to publish. */}
-          {/* <Footer /> */}
-          {/* <Analytics /> */}
-          {/* <SpeedInsights /> */}
-        </main>
+      <body className="antialiased max-w-xl mx-4 mt-8 lg:mx-auto bg-white text-black dark:bg-slate-900 dark:text-white">
+        <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+          <main className="flex-auto min-w-0 mt-6 flex flex-col px-2 md:px-0">
+            <Navbar />
+            {children}
+            {/* Enable these when you're ready to publish. */}
+            {/* <Footer /> */}
+            {/* <Analytics /> */}
+            {/* <SpeedInsights /> */}
+          </main>
+        </ThemeProvider>
       </body>
     </html>
   )
