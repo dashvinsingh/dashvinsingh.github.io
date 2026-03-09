@@ -1,6 +1,8 @@
 import { BlogPosts } from 'app/components/posts'
+import { getBlogPosts } from 'app/blog/utils'
 
 export default function Page() {
+  const posts = getBlogPosts()
   return (
     <section>
       <h1 className="mb-8 text-2xl font-semibold tracking-tighter">
@@ -10,7 +12,7 @@ export default function Page() {
         {`Welcome to the place for continuous learning and brewing thoughts ☕️`}
       </p>
       <div className="my-8">
-        <BlogPosts />
+        <BlogPosts posts={posts} />
       </div>
     </section>
   )
