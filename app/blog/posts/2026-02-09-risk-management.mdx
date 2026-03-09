@@ -1,0 +1,76 @@
+---
+title: 'Risk Management (3/26)'
+publishedAt: 2026-02-09
+summary: 'An attempt to define risk management and how it affects our day to day'
+published: true
+---
+
+The past weekend I travelled to Whistler for a two -day ski trip with some college friends. I've probably skied 5 times in my life and would say that I'm a beginner with the desire to learn. Whistler and Blackcomb are two peaks separated by a valley and both of these peaks have ski runs ranging from easy greens to extremely difficult glacier blacks. Obviously, as a beginner you are bound to fall and so I fell and got up - this happened pretty regularly over the trip. I'm grateful that the falls weren't too bad and I was able to get back home in one piece with lots of great memories made. Throughout this trip and on the flight back I kept thinking about _risk_ and how it affects my life. In this post, I take a crack at defining risk in a general context and drawing parallels with what I recently learned about risk management - both in the context of life and trading.
+
+
+### What is risk and how do I manage it? 
+
+_*Risk*_ is defined as the possibility that something unpleasant will happen. The keyword here is the _possibility_ - which indicates the unpleasant event is random and may or may not happen. As I'm writing this I'm realizing that the word risk, as commonly used as it is, is a vague and non-deterministic word that has an associated probability to it. Taking this idea forward, *risk management* then means the ability to manage the possibility of something unpleasant happening. To put it in other words, it attempts to reduce the probability of something unpleasant happening - ensuring a higher chance of a pleasant outcome. Risk management is then an optimization problem where we want to minimize the probability of doom and maximize the probability of boon.
+
+Now that the definitions have been laid out - let's look at some examples of risk and how we try to manage it in our day to day lives. 
+
+- I'm at an intersection on the street and the crossing signal says to wait, but me being in a rush I decide to cross anyway. At this moment I've increased the risk of being hit by a vehicle. To manage and minimize the risk in this case, I should consciously decide to wait for the signal to turn _white_ (I'm in Toronto).
+- I'm a beginner skier and know that I'm still learning to control my turns. Out of excitement and adrenaline I decide to take a lift to the top of a Black Diamond glacier - it's probably unwise because I'm risking significant injuries to my body and potentially my life. I managed this by keeping a cool head and sticking to the greens. 
+
+As much as we try to quantify risk management, my personal experiences tell me that it's more behavioral than numerical in a lot of areas. In that case, isn't risk management just self and emotional management?
+
+Risk management can be applied to all aspects of life covering all domains. Whether it's the difficulty of a ski run or a decision on how many billions to invest in AI, the art of risk management is constant in our world. In the next section, I'll touch on risk management strategies that I recently learned in the realm of stock trading.
+
+
+### Risk management in Trading
+
+When trading stocks, our main focus is to maximize returns in a short period of time. Therefore, it is important for us to be able to quantify the amount of risk we are willing to take in order to maximize the returns in the time window. I recently discovered that there's a methodical approach to doing this, so let's try it out. 
+
+We define _Risk (R)_ as the amount of money we are willing to lose in a trade. Before entering each trade, we should have an _R_ value in mind and use it to guide our decisions. Each individual's _R_ value is different and is a function of your financial appetite. For the purposes of this article, let's assume that we're beginners and don't have the capacity for a high _R_ yet. 
+
+Setting _R_ at $100, means that the max we're able to lose in this trade is $100. Now that we know _R_, we need to figure out the pricing for the trade.
+
+We're interested in purchasing shares of *ACME* (Acme Corporation) and it currently trades on the market for *$10* per share. The next thing we need to figure out is the _stop loss price_ which is the price at which we will sell these shares. This price is where our personal judgement _(and bet)_ comes in to play. I've personally skipped the process of deliberately setting a stop loss and have regretfully learned that this may be one of the most important steps in trading. So for this example, I think *ACME* corporation should not trade lesser than *$9* and so this is my stop loss - which can also be thought of as the amount of money we're willing to lose per share.
+
+Now that we have _R_, the purchase price of *$10*, and the stop loss price of *$9* we can calculate the number of units we should purchase such that we don't end up losing more than _R_ on this trade. 
+
+```
+R = $100
+Pp = $10 (Purchase price)
+Sp = $9 (Stop loss price)
+
+Number of units = R / (Pp - Sp)
+Number of units = 100 / (10 - 9) = 100
+Number of units = 100
+
+Total trade cost (Book cost) = 100 * $10 = $1000
+```
+
+The total cost of this trade would then be *$1000*, which means if the current market price drops to *$9*, we'd end up with a trade value of *$900* - at that point we should sell so that we don't end up losing more than _R_, which was set at $100. 
+
+Let's say we increase the stop loss price to *$9.5* because we're more conservative. 
+
+```
+Number of units = 100 / (10 - 9.5) = 100 / 0.5 = 200
+```
+
+Now that we've reduced the margin of error by narrowing the stop loss price, we would now buy 200 units at *$10* a piece making our book value *$2000*. At the market price of *$9.5*, our 200 units holding would be valued at *$1900* - thus ensuring that we still stay within the _R_ value of $100. _The idea here is that the narrower the stop loss distance, the higher the number of units and the wider the distance, the smaller the number of units._
+
+
+Now let's explore the other side of the question: what happens if the market price goes up? 
+
+Notice how _R_ can be used within the context of profits as well. For a single trade, the maximum amount we're willing to risk is _R_ - which was $100 in the example above. Now, if the market price goes up to *$12*, the value of our book (assuming Sp = $9) would be *$1200*, which means we're on track to make a profit of _2R_ if we choose to sell. Here's what different _R_ values mean:
+
+```
+-1R is the maximum we're willing to lose in a trade, which is $100
++1R means that we've made a profit equal to the predefined risk of $100
++3R means we've made a profit three times the risk of $100 = $300
+```
+
+So essentially, for every trade, we can define the amount of Risk we're willing to take and also the Reward we're willing settle for. This concept allows us to quantify the risk and reward factor of each trade, allowing us to stay disciplined and minimize our losses while keeping us less greedy with predefined reward multiples. 
+
+### Conclusion
+
+I was quite fascinated when I first discovered this method. It allowed me to walk into trades with a clear picture of my risk appetite as well as ensure that I don't end up making rash decisions. It is not always easy to follow this technique because as humans we're greedy and fearful at unexpected times. I've personally found this method to help me build sanity checks when making trades and cap the amount of risk I'm going to take. In life, the _R_ value is often hard to quantify - but the truth is there is always an _R_ associated with anything we do. Our journey is to try our best to minimize the downsides of _R_ and maximize the upsides. 
+
+So, how are you managing risk? 
